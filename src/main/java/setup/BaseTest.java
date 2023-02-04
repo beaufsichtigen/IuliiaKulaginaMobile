@@ -35,18 +35,18 @@ public class BaseTest implements IDriver {
     }
 
     @Parameters({"platformName","appType","deviceName","browserName","app"})
-    @BeforeSuite(alwaysRun = true)
+    @BeforeClass(alwaysRun = true) //changed for running two tests in one suite
     public void setUp(String platformName, String appType, String deviceName, @Optional("") String browserName, @Optional("") String app) throws Exception {
         System.out.println("Before: app type - "+appType);
         setAppiumDriver(platformName, deviceName, browserName, app);
         setPageObject(appType, appiumDriver);
-
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterClass(alwaysRun = true) //changed for running two tests in one suite
     public void tearDown() throws Exception {
         System.out.println("After");
         appiumDriver.closeApp();
+        //appiumDriver.quit();
     }
 
     private void setAppiumDriver(String platformName, String deviceName, String browserName, String app){
