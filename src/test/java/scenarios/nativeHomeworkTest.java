@@ -1,6 +1,5 @@
 package scenarios;
 
-import java.net.MalformedURLException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
@@ -8,7 +7,6 @@ import org.testng.asserts.SoftAssert;
 import setup.BaseTest;
 
 public class nativeHomeworkTest extends BaseTest {
-    public nativeHomeworkTest() throws MalformedURLException {}
 
     @Test(groups = {"native"}, description = "This simple test just click on the Sign In button")
     public void nativeTest() {

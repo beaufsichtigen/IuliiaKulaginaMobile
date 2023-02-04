@@ -8,7 +8,6 @@ import pageObjects.WebPages.GooglePage;
 import setup.BaseTest;
 
 public class webHomeworkTest extends BaseTest {
-    public webHomeworkTest() throws MalformedURLException {}
 
     //test will be started with other "web" tests
     @Test(groups = {"web"}, description = "Make sure that we've opened IANA homepage")

@@ -6,9 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class GooglePage extends WebPageObject {
-    public WebElement getSearchField() {
-        return searchField;
-    }
 
     @FindBy(xpath = "//input")
     private WebElement searchField;
