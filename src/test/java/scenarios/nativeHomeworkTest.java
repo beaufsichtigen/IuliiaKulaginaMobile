@@ -40,6 +40,5 @@ public class nativeHomeworkTest extends BaseTest {
         soft.assertEquals(getBudgetActivityPage().getAddExpenseBtn().getText(), "ADD EXPENSE"); //Check that there are button Add Expense
 
         soft.assertAll();
-        //getDriver().getExecuteMethod().execute("am start -n platkovsky.alexey.epamtestapp/platkovsky.alexey.epamtestapp.activities.LoginActivity", null);
     }
 }
