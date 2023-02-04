@@ -1,8 +1,14 @@
 package setup;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.AppiumFluentWait;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
+import pageObjects.NativePages.BudgetActivityPage;
+import pageObjects.NativePages.LogInPage;
+import pageObjects.NativePages.RegisterPage;
 import pageObjects.PageObject;
 
 import java.io.File;
@@ -14,6 +20,12 @@ public class BaseTest implements IDriver {
 
     private static AppiumDriver appiumDriver; // singleton
     IPageObject po;
+
+    LogInPage logInPage;
+    RegisterPage registerPage;
+
+    AppiumFluentWait webDriverWait;
+    BudgetActivityPage budgetActivityPage;
 
     @Override
     public AppiumDriver getDriver() { return appiumDriver; }
@@ -63,5 +75,34 @@ public class BaseTest implements IDriver {
         po = new PageObject(appType, appiumDriver);
     }
 
+    protected void waitUntilPageLoad(){
+        new WebDriverWait(getDriver(), 10).until(
+            wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete")
+        );
+    }
 
+    //Getters for pages
+    public LogInPage getLogInPage () {
+        if (logInPage == null)
+        return new LogInPage(appiumDriver);
+        else return logInPage;
+    }
+
+    public RegisterPage getRegisterPage () {
+        if (registerPage == null)
+        return new RegisterPage(appiumDriver);
+        else return registerPage;
+    }
+
+    public BudgetActivityPage getBudgetActivityPage () {
+        if (webDriverWait == null)
+        return new BudgetActivityPage(appiumDriver);
+        else return budgetActivityPage;
+    }
+
+    public AppiumFluentWait getWebDriverWait () {
+        if (webDriverWait == null)
+            return new AppiumFluentWait(appiumDriver);
+        else return webDriverWait;
+    }
 }
