@@ -14,7 +14,7 @@ public class webHomeworkTest extends BaseTest {
     public void WebTest() throws InterruptedException {
 
         //load google search page
-        getDriver().get("http://www.google.com");
+        getDriver().get("https://www.google.com");
 
         String searchText = "EPAM";
 
