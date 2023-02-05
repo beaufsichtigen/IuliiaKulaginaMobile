@@ -10,7 +10,6 @@ import pageObjects.NativePages.BudgetActivityPage;
 import pageObjects.NativePages.LogInPage;
 import pageObjects.NativePages.RegisterPage;
 import pageObjects.PageObject;
-
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -46,7 +45,6 @@ public class BaseTest implements IDriver {
     public void tearDown() throws Exception {
         System.out.println("After");
         appiumDriver.closeApp();
-        //appiumDriver.quit();
     }
 
     private void setAppiumDriver(String platformName, String deviceName, String browserName, String app){
