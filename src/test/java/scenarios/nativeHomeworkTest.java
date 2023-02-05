@@ -9,13 +9,14 @@ import setup.BaseTest;
 public class nativeHomeworkTest extends BaseTest {
 
     @Test(groups = {"native"}, description = "This simple test just click on the Sign In button")
-    public void nativeTest() {
+    public void nativeTest() throws InterruptedException, NoSuchFieldException {
 
         //Go to register page
         getLogInPage().clickRegisterButton();
 
         //Wait when the page opens
-        getWebDriverWait().until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(getRegisterPage().getIdAllRegisterForm())));
+        getWebDriverWait().until(
+            ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(getRegisterPage().getIdAllRegisterForm())));
 
         //get credentials from environment variables
         String email = System.getenv("email");
@@ -23,21 +24,32 @@ public class nativeHomeworkTest extends BaseTest {
         String username = System.getenv("username");
 
         //Input credentials
-
         getRegisterPage().fillRegisterForm(email, username, password);
+
+        //Try to set checkbox true
+        //AndroidElement element = (AndroidElement) getRegisterPage().getReadCheckbox();
+        //System.out.println(element.getAttribute("checked"));
+        //getDriver().executeScript("arguments[0].setAttribute('checked', 'true');", element);
+        // System.out.println(element.getAttribute("checked"));
 
         //click register
         getRegisterPage().getRegisterBtn().click();
 
-        //Try to sign in
-        getWebDriverWait().until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(getLogInPage().getIdAllLoginForm())));
+        getWebDriverWait().until(
+            ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(getLogInPage().getIdAllLoginForm())));
+
+        //Try to sign
         getLogInPage().signIn(email, password);
 
         //Assert that there is text "BudgetActivity" and Add expense button
-        getWebDriverWait().until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(getBudgetActivityPage().getIdAllBudgetActivity())));
+        getWebDriverWait().until(
+            ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(getBudgetActivityPage().getIdAllBudgetActivity())));
+
+        //Check that there are any element with "BudgetActivity" text
         SoftAssert soft = new SoftAssert();
-        soft.assertNotNull(getBudgetActivityPage().getBudgetActivity()); //Check that there are any element with "BudgetActivity" text
-        soft.assertEquals(getBudgetActivityPage().getAddExpenseBtn().getText(), "ADD EXPENSE"); //Check that there are button Add Expense
+        soft.assertNotNull(getBudgetActivityPage().getBudgetActivity());
+        //Check that there are button Add Expense
+        soft.assertEquals(getBudgetActivityPage().getAddExpenseBtn().getText(),"ADD EXPENSE");
 
         soft.assertAll();
     }
