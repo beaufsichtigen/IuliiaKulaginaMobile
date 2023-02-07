@@ -21,7 +21,7 @@ public class PageObject implements IPageObject {
             case "native":
                 somePageObject = new LogInPage(appiumDriver);
                 break;
-            default: throw new Exception("Can't create a page object for "+appType);
+            default: throw new Exception("Can't create a page object for "+ appType);
         }
     }
 

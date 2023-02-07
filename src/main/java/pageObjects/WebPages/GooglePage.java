@@ -13,6 +13,20 @@ public class GooglePage extends WebPageObject {
     @FindBy(xpath = "//*[@id='rso']/*")
     private List<WebElement> searchResults;
 
+
+    //Change "Olvasson" to your scroll down button text if it differs
+
+    public static final String scrollXpath = "//button//*[contains(text(),'Olvasson')]";
+
+    //Change "eluta" to your accept cookie button text if it differs
+    public static final String acceptButtonXpath = "//button//*[contains(text(),'eluta')]";
+
+    @FindBy(xpath = scrollXpath)
+    private WebElement scrollButton;
+
+    @FindBy(xpath = acceptButtonXpath)
+    private WebElement acceptButton;
+
     public GooglePage(AppiumDriver driver) {
         super(driver);
     }
@@ -35,4 +49,14 @@ public class GooglePage extends WebPageObject {
         }
         return resultCheck;
     }
+
+    public WebElement getButtons() {
+
+        return scrollButton;
+    }
+
+    public WebElement getAcceptButton() {
+        return acceptButton;
+    }
+
 }
