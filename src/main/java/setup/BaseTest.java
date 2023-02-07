@@ -29,13 +29,16 @@ public class BaseTest implements IDriver {
     BudgetActivityPage budgetActivityPage;
 
     @Override
-    public AppiumDriver getDriver() { return appiumDriver; }
+    public AppiumDriver getDriver() {
+        return appiumDriver;
+    }
 
     public IPageObject getPo() {
         return po;
     }
 
-    @Parameters({"platformName", "appType", "deviceName", "udid", "browserName","app","appPackage","appActivity","bundleId"})
+    @Parameters({"platformName", "appType", "deviceName", "udid", "browserName", "app", "appPackage", "appActivity",
+        "bundleId"})
     @BeforeClass(alwaysRun = true) //changed for running two tests in one suite
     public void setUp(String platformName,
                       String appType,
@@ -46,7 +49,7 @@ public class BaseTest implements IDriver {
                       @Optional("") String appPackage,
                       @Optional("") String appActivity,
                       @Optional("") String bundleId) throws Exception {
-        System.out.println("Before: app type - "+appType);
+        System.out.println("Before: app type - " + appType);
         setAppiumDriver(platformName, deviceName, udid, browserName, app, appPackage, appActivity, bundleId);
         setPageObject(appType, appiumDriver);
     }
@@ -58,31 +61,31 @@ public class BaseTest implements IDriver {
     }
 
     private void setAppiumDriver(String platformName, String deviceName, String udid, String browserName,
-                                 String app, String appPackage, String appActivity, String bundleId){
+                                 String app, String appPackage, String appActivity, String bundleId) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         //mandatory Android capabilities
-        capabilities.setCapability("platformName",platformName);
-        capabilities.setCapability("deviceName",deviceName);
+        capabilities.setCapability("platformName", platformName);
+        capabilities.setCapability("deviceName", deviceName);
         capabilities.setCapability("udid", udid);
 
-        if(app.endsWith(".apk")) capabilities.setCapability("app", (new File(app)).getAbsolutePath());
+        if (app.endsWith(".apk"))
+            capabilities.setCapability("app", (new File(app)).getAbsolutePath());
 
         capabilities.setCapability("browserName", browserName);
-        capabilities.setCapability("chromedriverDisableBuildCheck","true");
+        capabilities.setCapability("chromedriverDisableBuildCheck", "true");
 
         // Capabilities for test of Android native app on EPAM Mobile Cloud
-        capabilities.setCapability("appPackage",appPackage);
-        capabilities.setCapability("appActivity",appActivity);
+        capabilities.setCapability("appPackage", appPackage);
+        capabilities.setCapability("appActivity", appActivity);
 
         // Capabilities for test of iOS native app on EPAM Mobile Cloud
-         capabilities.setCapability("bundleId",bundleId);
-//        if(platformName.equals("iOS")) capabilities.setCapability("automationName","XCUITest");
-
-
+        capabilities.setCapability("bundleId", bundleId);
+        //        if(platformName.equals("iOS")) capabilities.setCapability("automationName","XCUITest");
 
         try {
 
-            String url = "https://" + System.getenv("USERNAMEMOBIT") + ":" + URLEncoder.encode(System.getenv("TOKEN")) + "@app.mobitru.com/wd/hub";
+            String url = "https://" + System.getenv("USERNAMEMOBIT") + ":" + URLEncoder.encode(System.getenv("TOKEN"))
+                + "@app.mobitru.com/wd/hub";
             System.out.println("url:" + url + capabilities);
             appiumDriver = new AppiumDriver(new URL(url), capabilities);
         } catch (MalformedURLException e) {
@@ -91,50 +94,55 @@ public class BaseTest implements IDriver {
 
         // Timeouts tuning
         appiumDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
     }
 
     private void setPageObject(String appType, AppiumDriver appiumDriver) throws Exception {
         po = new PageObject(appType, appiumDriver);
     }
 
-    protected void waitUntilPageLoad(){
+    protected void waitUntilPageLoad() {
         new WebDriverWait(getDriver(), 10).until(
             wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete")
         );
     }
 
     //Getters for pages
-    public LogInPage getLogInPage () {
+    public LogInPage getLogInPage() {
         if (logInPage == null)
-        return new LogInPage(appiumDriver);
-        else return logInPage;
+            return new LogInPage(appiumDriver);
+        else
+            return logInPage;
     }
 
-    public RegisterPage getRegisterPage () {
+    public RegisterPage getRegisterPage() {
         if (registerPage == null)
-        return new RegisterPage(appiumDriver);
-        else return registerPage;
+            return new RegisterPage(appiumDriver);
+        else
+            return registerPage;
     }
 
-    public BudgetActivityPage getBudgetActivityPage () {
+    public BudgetActivityPage getBudgetActivityPage() {
         if (webDriverWait == null)
-        return new BudgetActivityPage(appiumDriver);
-        else return budgetActivityPage;
+            return new BudgetActivityPage(appiumDriver);
+        else
+            return budgetActivityPage;
     }
 
-    public AppiumFluentWait getWebDriverWait () {
+    public AppiumFluentWait getWebDriverWait() {
         if (webDriverWait == null)
             return new AppiumFluentWait(appiumDriver);
-        else return webDriverWait;
+        else
+            return webDriverWait;
     }
 
     public void acceptHungaryCookie(GooglePage page) {
         waitUntilPageLoad();
-        page.getButtons().click();
-        waitUntilPageLoad();
-        page.getButtons().click();
-        waitUntilPageLoad();
-        page.getAcceptButton().click();}
-
+        if (page.getButtons().isDisplayed()) {
+            page.getButtons().click();
+            waitUntilPageLoad();
+            page.getButtons().click();
+            waitUntilPageLoad();
+            page.getAcceptButton().click();
+        }
+    }
 }

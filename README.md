@@ -16,6 +16,6 @@ Before run:
 - USERNAMEMOBIT. For example if you registration email epam_epamov@epam.com, use epam_epamov.  
 - TOKEN variable with your personal token from mobitru.
 
-3. You have to take device and install native app before running tests
+3. You have to take device and install native app before running tests. Ypu can find it in /main/resourses
 
-4. For web test please use UA VPN cookie policy if needed.
+4. For web test please use EU VPN.  cookie policy if needed.

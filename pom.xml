@@ -88,14 +88,14 @@
             </properties>
         </profile>
 
-<!--        <profile>-->
-<!--            <id>webIOS</id>-->
-<!--            <activation>-->
-<!--                <activeByDefault>true</activeByDefault>-->
-<!--            </activation>-->
-<!--            <properties>-->
-<!--                <suite.file>./src/test/resources/webIOSTNG.xml</suite.file>-->
-<!--            </properties>-->
-<!--        </profile>-->
+        <profile>
+            <id>webIOS</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/webIOSTNG.xml</suite.file>
+            </properties>
+        </profile>
     </profiles>
 </project>

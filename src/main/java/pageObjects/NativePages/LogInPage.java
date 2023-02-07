@@ -18,11 +18,11 @@ public class LogInPage extends BaseNativePage {
     private WebElement registerBtn;
 
 
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@label='Register new account']")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[@label='']")
     @FindBy(id = "platkovsky.alexey.epamtestapp:id/login_email")
     private WebElement emailField;
 
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@label='Register new account']")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeSecureTextField[@label='']")
     @FindBy(id = "platkovsky.alexey.epamtestapp:id/login_pwd")
     private WebElement passwordField;
 
@@ -42,5 +42,13 @@ public class LogInPage extends BaseNativePage {
         emailField.sendKeys(emailOrUsername);
         passwordField.sendKeys(password);
         signInBtn.click();
+    }
+
+    public WebElement getSignInBtn() {
+        return signInBtn;
+    }
+
+    public WebElement getRegisterBtn() {
+        return registerBtn;
     }
 }

@@ -1,6 +1,5 @@
 package scenarios;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -8,15 +7,14 @@ import setup.BaseTest;
 
 public class nativeHomeworkTest extends BaseTest {
 
-    @Test(groups = {"native"}, description = "This simple test just click on the Sign In button")
+    @Test(groups = {"native"}, description = "Budget Activity page check")
     public void nativeTest() throws InterruptedException, NoSuchFieldException {
 
         //Go to register page
         getLogInPage().clickRegisterButton();
 
         //Wait when the page opens
-        getWebDriverWait().until(
-            ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(getRegisterPage().getIdAllRegisterForm())));
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(getRegisterPage().getRegisterBtn()));
 
         //get credentials from environment variables
         String email = System.getenv("email");
@@ -35,21 +33,19 @@ public class nativeHomeworkTest extends BaseTest {
         //click register
         getRegisterPage().getRegisterBtn().click();
 
-        getWebDriverWait().until(
-            ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(getLogInPage().getIdAllLoginForm())));
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(getLogInPage().getSignInBtn()));
 
         //Try to sign
         getLogInPage().signIn(email, password);
 
         //Assert that there is text "BudgetActivity" and Add expense button
-        getWebDriverWait().until(
-            ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(getBudgetActivityPage().getIdAllBudgetActivity())));
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(getBudgetActivityPage().getBudgetActivity()));;
 
         //Check that there are any element with "BudgetActivity" text
         SoftAssert soft = new SoftAssert();
         soft.assertNotNull(getBudgetActivityPage().getBudgetActivity());
         //Check that there are button Add Expense
-        soft.assertEquals(getBudgetActivityPage().getAddExpenseBtn().getText(),"ADD EXPENSE");
+        soft.assertTrue(getBudgetActivityPage().getAddExpenseBtn().isDisplayed());
 
         soft.assertAll();
     }

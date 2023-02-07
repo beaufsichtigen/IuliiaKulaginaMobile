@@ -1,5 +1,7 @@
 package scenarios;
 
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -8,13 +10,10 @@ import org.testng.annotations.Test;
 import pageObjects.WebPages.GooglePage;
 import setup.BaseTest;
 
-import static pageObjects.WebPages.GooglePage.acceptButtonXpath;
-import static pageObjects.WebPages.GooglePage.scrollXpath;
-
 public class webHomeworkTest extends BaseTest {
 
     //test will be started with other "web" tests
-    @Test(groups = {"web"}, description = "Make sure that we've opened IANA homepage")
+    @Test(groups = {"web"}, description = "Check search results for the 'EPAM' word")
     public void WebTest() throws InterruptedException {
 
         //load google search page
@@ -30,14 +29,14 @@ public class webHomeworkTest extends BaseTest {
         // If you have no this popup please commit.
         acceptHungaryCookie(page);
 
-
         page.fillSearchField(searchText);
-        getDriver().getKeyboard().pressKey(Keys.ENTER);
+        //page.getEnterButton().click();
+        getDriver().getKeyboard().pressKey(Keys.ENTER); //don't work for the IOs
+        //new TouchAction(getDriver()).press(PointOption.point(1000, 2050)).release().perform();
 
         //Assert that result match request
-        waitUntilPageLoad();
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(page.getSearchResults().get(0)));
+        ;
         Assert.assertTrue(page.isResultsContainsText(searchText));
     }
-
-
 }
