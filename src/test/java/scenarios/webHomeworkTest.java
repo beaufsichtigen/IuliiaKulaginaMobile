@@ -10,7 +10,7 @@ import setup.BaseTest;
 public class webHomeworkTest extends BaseTest {
 
     //test will be started with other "web" tests
-    @Test(groups = {"web"}, description = "Make sure that we've opened IANA homepage")
+    @Test(groups = {"web"}, description = "Check EPAM word search results")
     public void WebTest() throws InterruptedException {
 
         //load google search page

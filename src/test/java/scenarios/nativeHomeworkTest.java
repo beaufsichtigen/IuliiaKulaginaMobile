@@ -8,7 +8,7 @@ import setup.BaseTest;
 
 public class nativeHomeworkTest extends BaseTest {
 
-    @Test(groups = {"native"}, description = "This simple test just click on the Sign In button")
+    @Test(groups = {"native"}, description = "Budget Activity page check")
     public void nativeTest() throws InterruptedException, NoSuchFieldException {
 
         //Go to register page
