@@ -8,3 +8,5 @@ Before run please set maven environment variables with names
 "email",
 "username",
 "password".
+
+For web test please open https://www.google.com and accept all the cookies in advance. 
