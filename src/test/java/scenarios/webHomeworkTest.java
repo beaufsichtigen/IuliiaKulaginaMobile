@@ -43,7 +43,7 @@ public class webHomeworkTest extends BaseTest {
                 page.getSearchField().sendKeys(searchText + Keys.ENTER);
                 break;
             default:
-                throw new Exception("Can't create a page object for " + platformName);
+                throw new Exception("Can't click Enter on " + platformName);
         }
 
         //Assert that result match request
