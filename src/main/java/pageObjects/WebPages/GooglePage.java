@@ -1,28 +1,21 @@
 package pageObjects.WebPages;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class GooglePage extends WebPageObject {
 
-    @iOSXCUITFindBy(xpath = "//input")
-    @FindBy(xpath = "//input")
-    private WebElement searchField;
-
-    @iOSXCUITFindBy(xpath = "//*[@id='rso']/*")
-    @FindBy(xpath = "//*[@id='rso']/*")
-    private List<WebElement> searchResults;
-
-    public WebElement getEnterButton() {
-        return enterButton;
+    public WebElement getSearchField() {
+        return searchField;
     }
 
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@label='go']")
-    private WebElement enterButton;
+    @FindBy(xpath = "//input[@name='q']")
+    private WebElement searchField;
 
+    @FindBy(xpath = "//*[@id='rso']/*")
+    private List<WebElement> searchResults;
 
     //Change "Olvasson" to your scroll down button text if it differs
 
@@ -31,7 +24,6 @@ public class GooglePage extends WebPageObject {
     //Change "eluta" to your accept cookie button text if it differs
     public static final String acceptButtonXpath = "//button//*[contains(text(),'eluta')]";
 
-    @iOSXCUITFindBy(xpath = scrollXpath)
     @FindBy(xpath = scrollXpath)
     private WebElement scrollButton;
 
@@ -45,13 +37,12 @@ public class GooglePage extends WebPageObject {
     public void fillSearchField(String search) {
         searchField.click();
         searchField.sendKeys(search);
-
     }
 
     public boolean isResultsContainsText(String search) {
         boolean resultCheck = false;
         for (WebElement result : searchResults) {
-            String text =  result.getText();
+            String text = result.getText();
             if (text.contains(search)) {
                 resultCheck = true;
                 System.out.println(text);

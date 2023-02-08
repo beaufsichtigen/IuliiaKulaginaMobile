@@ -19,3 +19,5 @@ Before run:
 3. You have to take device and install native app before running tests. Ypu can find it in /main/resourses
 
 4. For web test please use EU VPN.  cookie policy if needed.
+
+5. You should change devices ID in XML files if needed.

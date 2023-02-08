@@ -68,8 +68,9 @@ public class BaseTest implements IDriver {
         capabilities.setCapability("deviceName", deviceName);
         capabilities.setCapability("udid", udid);
 
-        if (app.endsWith(".apk"))
+        if (app.endsWith(".apk")) {
             capabilities.setCapability("app", (new File(app)).getAbsolutePath());
+        }
 
         capabilities.setCapability("browserName", browserName);
         capabilities.setCapability("chromedriverDisableBuildCheck", "true");
@@ -108,31 +109,35 @@ public class BaseTest implements IDriver {
 
     //Getters for pages
     public LogInPage getLogInPage() {
-        if (logInPage == null)
+        if (logInPage == null) {
             return new LogInPage(appiumDriver);
-        else
+        } else {
             return logInPage;
+        }
     }
 
     public RegisterPage getRegisterPage() {
-        if (registerPage == null)
+        if (registerPage == null) {
             return new RegisterPage(appiumDriver);
-        else
+        } else {
             return registerPage;
+        }
     }
 
     public BudgetActivityPage getBudgetActivityPage() {
-        if (webDriverWait == null)
+        if (webDriverWait == null) {
             return new BudgetActivityPage(appiumDriver);
-        else
+        } else {
             return budgetActivityPage;
+        }
     }
 
     public AppiumFluentWait getWebDriverWait() {
-        if (webDriverWait == null)
+        if (webDriverWait == null) {
             return new AppiumFluentWait(appiumDriver);
-        else
+        } else {
             return webDriverWait;
+        }
     }
 
     public void acceptHungaryCookie(GooglePage page) {

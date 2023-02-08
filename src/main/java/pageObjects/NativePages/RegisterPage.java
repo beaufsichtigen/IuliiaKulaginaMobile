@@ -41,14 +41,6 @@ public class RegisterPage extends BaseNativePage {
         return registerBtn;
     }
 
-    public String getIdAllRegisterForm() {
-        return idAllRegisterForm;
-    }
-
-    public WebElement getReadCheckbox() {
-        return iReadCheckbox;
-    }
-
     public void fillRegisterForm(String email, String username, String password) {
         emailField.sendKeys(email);
         usernameField.sendKeys(username);

@@ -28,8 +28,4 @@ public class BudgetActivityPage extends BaseNativePage {
     public WebElement getBudgetActivity() {
         return budgetActivity;
     }
-
-    public String getIdAllBudgetActivity() {
-        return idAllBudgetActivity;
-    }
 }

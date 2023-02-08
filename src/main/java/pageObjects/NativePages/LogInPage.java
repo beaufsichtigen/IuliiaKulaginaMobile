@@ -17,7 +17,6 @@ public class LogInPage extends BaseNativePage {
     @FindBy(id = "platkovsky.alexey.epamtestapp:id/register_button")
     private WebElement registerBtn;
 
-
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[@label='']")
     @FindBy(id = "platkovsky.alexey.epamtestapp:id/login_email")
     private WebElement emailField;

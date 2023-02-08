@@ -39,11 +39,12 @@ public class nativeHomeworkTest extends BaseTest {
         getLogInPage().signIn(email, password);
 
         //Assert that there is text "BudgetActivity" and Add expense button
-        getWebDriverWait().until(ExpectedConditions.visibilityOf(getBudgetActivityPage().getBudgetActivity()));;
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(getBudgetActivityPage().getBudgetActivity()));
 
         //Check that there are any element with "BudgetActivity" text
         SoftAssert soft = new SoftAssert();
         soft.assertNotNull(getBudgetActivityPage().getBudgetActivity());
+
         //Check that there are button Add Expense
         soft.assertTrue(getBudgetActivityPage().getAddExpenseBtn().isDisplayed());
 
