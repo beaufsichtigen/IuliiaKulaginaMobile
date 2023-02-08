@@ -2,7 +2,6 @@ package scenarios;
 
 import java.util.Locale;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -31,15 +30,15 @@ public class webHomeworkTest extends BaseTest {
         // If you have no this popup please commit.
         acceptHungaryCookie(page);
 
-        //Fill search field
-        page.fillSearchField(searchText);
-
         //Click enter
         switch (platformName.toUpperCase(Locale.ROOT)) {
             case "ANDROID":
+                //Fill search field
+                page.fillSearchField(searchText);
                 getDriver().getKeyboard().pressKey(Keys.ENTER); //don't work for the IOs
                 break;
             case "IOS":
+                page.getSearchField().click();
                 page.getSearchField().sendKeys(searchText + Keys.ENTER);
                 break;
             default:
@@ -47,8 +46,7 @@ public class webHomeworkTest extends BaseTest {
         }
 
         //Assert that result match request
-        getWebDriverWait().until(ExpectedConditions.visibilityOf(page.getSearchResults().get(0)));
-
+        waitUntilPageLoad();
         Assert.assertTrue(page.isResultsContainsText(searchText));
     }
 }
