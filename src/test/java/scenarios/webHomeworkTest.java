@@ -11,7 +11,7 @@ public class webHomeworkTest extends BaseTest {
 
     //test will be started with other "web" tests
     @Test(groups = {"web"}, description = "Check EPAM word search results")
-    public void WebTest() throws InterruptedException {
+    public void WebTest() {
 
         //load google search page
         getDriver().get("https://www.google.com");
@@ -25,6 +25,6 @@ public class webHomeworkTest extends BaseTest {
 
         //Assert that result match request
         waitUntilPageLoad();
-        Assert.assertTrue(page.isResultsContainsText(searchText));
+        Assert.assertTrue(page.isResultsContainsText(searchText), "Messages in result don't match search request");
     }
 }

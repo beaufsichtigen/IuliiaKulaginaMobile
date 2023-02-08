@@ -9,14 +9,14 @@ import setup.BaseTest;
 public class nativeHomeworkTest extends BaseTest {
 
     @Test(groups = {"native"}, description = "Budget Activity page check")
-    public void nativeTest() throws InterruptedException, NoSuchFieldException {
+    public void nativeTest() {
 
         //Go to register page
         getLogInPage().clickRegisterButton();
 
         //Wait when the page opens
         getWebDriverWait().until(
-            ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(getRegisterPage().getIdAllRegisterForm())));
+            ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(getRegisterPage().getIdAllRegisterForm())));
 
         //get credentials from environment variables
         String email = System.getenv("email");
@@ -25,12 +25,6 @@ public class nativeHomeworkTest extends BaseTest {
 
         //Input credentials
         getRegisterPage().fillRegisterForm(email, username, password);
-
-        //Try to set checkbox true
-        //AndroidElement element = (AndroidElement) getRegisterPage().getReadCheckbox();
-        //System.out.println(element.getAttribute("checked"));
-        //getDriver().executeScript("arguments[0].setAttribute('checked', 'true');", element);
-        // System.out.println(element.getAttribute("checked"));
 
         //click register
         getRegisterPage().getRegisterBtn().click();
@@ -47,9 +41,9 @@ public class nativeHomeworkTest extends BaseTest {
 
         //Check that there are any element with "BudgetActivity" text
         SoftAssert soft = new SoftAssert();
-        soft.assertNotNull(getBudgetActivityPage().getBudgetActivity());
+        soft.assertNotNull(getBudgetActivityPage().getBudgetActivityText(), "Budget Activity message was not found");
         //Check that there are button Add Expense
-        soft.assertEquals(getBudgetActivityPage().getAddExpenseBtn().getText(),"ADD EXPENSE");
+        soft.assertEquals(getBudgetActivityPage().getAddExpenseBtn().getText(),"ADD EXPENSE", "Add expense button was not found");
 
         soft.assertAll();
     }

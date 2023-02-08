@@ -6,10 +6,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class BudgetActivityPage extends BaseNativePage {
 
-    private String idAllBudgetActivity = "platkovsky.alexey.epamtestapp:id/main_content";
+    private static final String idAllBudgetActivity = allElementsIdSelectorCommonPart + "main_content";
 
     @FindBy(xpath = "//*[contains(@text,'BudgetActivity')]")
-    private WebElement budgetActivity;
+    private WebElement budgetActivityText;
 
     @FindBy(id = "platkovsky.alexey.epamtestapp:id/add_new_expense")
     private WebElement addExpenseBtn;
@@ -22,8 +22,8 @@ public class BudgetActivityPage extends BaseNativePage {
         return addExpenseBtn;
     }
 
-    public WebElement getBudgetActivity() {
-        return budgetActivity;
+    public WebElement getBudgetActivityText() {
+        return budgetActivityText;
     }
 
     public String getIdAllBudgetActivity() {

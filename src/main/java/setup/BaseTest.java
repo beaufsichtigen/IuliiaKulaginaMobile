@@ -25,6 +25,9 @@ public class BaseTest implements IDriver {
 
     AppiumFluentWait webDriverWait;
     BudgetActivityPage budgetActivityPage;
+    static final int waitTime = 10;
+    static final String isPageReadyScript = "return document.readyState";
+    static final String isPageReadyScriptResult = "complete";
 
     @Override
     public AppiumDriver getDriver() { return appiumDriver; }
@@ -35,14 +38,18 @@ public class BaseTest implements IDriver {
 
     @Parameters({"platformName","appType","deviceName","browserName","app"})
     @BeforeClass(alwaysRun = true) //changed for running two tests in one suite
-    public void setUp(String platformName, String appType, String deviceName, @Optional("") String browserName, @Optional("") String app) throws Exception {
+    public void setUp(String platformName, String appType, String deviceName, @Optional("") String browserName, @Optional("") String app) {
         System.out.println("Before: app type - "+appType);
         setAppiumDriver(platformName, deviceName, browserName, app);
-        setPageObject(appType, appiumDriver);
+        try {
+            setPageObject(appType, appiumDriver);
+        } catch (Exception e) {
+            throw new RuntimeException("Exception while set up:" + e);
+        }
     }
 
     @AfterClass(alwaysRun = true) //changed for running two tests in one suite
-    public void tearDown() throws Exception {
+    public void tearDown() {
         System.out.println("After");
         appiumDriver.closeApp();
     }
@@ -65,17 +72,21 @@ public class BaseTest implements IDriver {
         }
 
         // Timeouts tuning
-        appiumDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        appiumDriver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
 
     }
 
-    private void setPageObject(String appType, AppiumDriver appiumDriver) throws Exception {
-        po = new PageObject(appType, appiumDriver);
+    private void setPageObject(String appType, AppiumDriver appiumDriver) {
+        try {
+            po = new PageObject(appType, appiumDriver);
+        } catch (Exception e) {
+            throw new RuntimeException("Exception while Page Object setting:" + e);
+        }
     }
 
     protected void waitUntilPageLoad(){
-        new WebDriverWait(getDriver(), 10).until(
-            wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete")
+        new WebDriverWait(getDriver(), waitTime).until(
+            wd -> ((JavascriptExecutor) wd).executeScript(isPageReadyScript).equals(isPageReadyScriptResult)
         );
     }
 
@@ -93,7 +104,7 @@ public class BaseTest implements IDriver {
     }
 
     public BudgetActivityPage getBudgetActivityPage () {
-        if (webDriverWait == null)
+        if (budgetActivityPage == null)
         return new BudgetActivityPage(appiumDriver);
         else return budgetActivityPage;
     }

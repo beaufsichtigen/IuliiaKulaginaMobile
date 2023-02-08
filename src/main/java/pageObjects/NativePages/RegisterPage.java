@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class RegisterPage extends BaseNativePage {
 
-    private String idAllRegisterForm = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout";
+    final String idAllRegisterForm = allElementsIdSelectorCommonPart + "email_registration_form";
 
     @FindBy(id = "platkovsky.alexey.epamtestapp:id/registration_email")
     WebElement emailField;

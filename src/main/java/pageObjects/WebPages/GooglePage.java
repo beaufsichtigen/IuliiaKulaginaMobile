@@ -11,7 +11,7 @@ public class GooglePage extends WebPageObject {
     private WebElement searchField;
 
     @FindBy(xpath = "//*[@id='rso']/*")
-    private List<WebElement> searchResults;
+    private List<WebElement> searchResultsList;
 
     public GooglePage(AppiumDriver driver) {
         super(driver);
@@ -24,15 +24,12 @@ public class GooglePage extends WebPageObject {
     }
 
     public boolean isResultsContainsText(String search) {
-        boolean resultCheck = false;
-        for (WebElement result : searchResults) {
+        for (WebElement result : searchResultsList) {
             String text =  result.getText();
             if (text.contains(search)) {
-                resultCheck = true;
                 System.out.println(text);
-                break;
+                return true;
             }
-        }
-        return resultCheck;
+        } return false;
     }
 }
