@@ -22,16 +22,16 @@ public class GooglePage extends WebPageObject {
     public void fillSearchField(String search) {
         searchField.click();
         searchField.sendKeys(search);
-
     }
 
     public boolean isResultsContainsText(String search) {
         for (WebElement result : searchResultsList) {
-            String text =  result.getText();
+            String text = result.getText();
             if (text.contains(search)) {
                 System.out.println(text);
                 return true;
             }
-        } return false;
+        }
+        return false;
     }
 }

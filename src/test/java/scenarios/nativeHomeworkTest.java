@@ -39,7 +39,8 @@ public class nativeHomeworkTest extends BaseTest {
         soft.assertNotNull(getBudgetActivityPage().getBudgetActivityText(), "Budget Activity message was not found");
 
         //Check that there are button Add Expense
-        soft.assertEquals(getBudgetActivityPage().getAddExpenseBtn().getText(),"ADD EXPENSE", "Add expense button was not found");
+        soft.assertEquals(getBudgetActivityPage().getAddExpenseBtn().getText(), "ADD EXPENSE",
+            "Add expense button was not found");
 
         soft.assertAll();
     }

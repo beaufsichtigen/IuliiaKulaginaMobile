@@ -7,7 +7,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Optional;
+import org.testng.annotations.AfterClass;
 import pageObjects.NativePages.BudgetActivityPage;
 import pageObjects.NativePages.LogInPage;
 import pageObjects.NativePages.RegisterPage;
@@ -32,16 +35,19 @@ public class BaseTest implements IDriver {
     static final String isPageReadyScriptResult = "complete";
 
     @Override
-    public AppiumDriver getDriver() { return appiumDriver; }
+    public AppiumDriver getDriver() {
+        return appiumDriver;
+    }
 
     public IPageObject getPo() {
         return po;
     }
 
-    @Parameters({"platformName","appType","deviceName","browserName","app"})
+    @Parameters({"platformName", "appType", "deviceName", "browserName", "app"})
     @BeforeClass(alwaysRun = true) //changed for running two tests in one suite
-    public void setUp(String platformName, String appType, String deviceName, @Optional("") String browserName, @Optional("") String app) {
-        System.out.println("Before: app type - "+appType);
+    public void setUp(String platformName, String appType, String deviceName, @Optional("") String browserName,
+                      @Optional("") String app) {
+        System.out.println("Before: app type - " + appType);
         setAppiumDriver(platformName, deviceName, browserName, app);
         try {
             setPageObject(appType, appiumDriver);
@@ -56,16 +62,18 @@ public class BaseTest implements IDriver {
         appiumDriver.closeApp();
     }
 
-    private void setAppiumDriver(String platformName, String deviceName, String browserName, String app){
+    private void setAppiumDriver(String platformName, String deviceName, String browserName, String app) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         //mandatory Android capabilities
-        capabilities.setCapability("platformName",platformName);
-        capabilities.setCapability("deviceName",deviceName);
+        capabilities.setCapability("platformName", platformName);
+        capabilities.setCapability("deviceName", deviceName);
 
-        if(app.endsWith(".apk")) capabilities.setCapability("app", (new File(app)).getAbsolutePath());
+        if (app.endsWith(".apk")) {
+            capabilities.setCapability("app", (new File(app)).getAbsolutePath());
+        }
 
         capabilities.setCapability("browserName", browserName);
-        capabilities.setCapability("chromedriverDisableBuildCheck","true");
+        capabilities.setCapability("chromedriverDisableBuildCheck", "true");
 
         try {
             appiumDriver = new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
@@ -75,7 +83,6 @@ public class BaseTest implements IDriver {
 
         // Timeouts tuning
         appiumDriver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
-
     }
 
     private void setPageObject(String appType, AppiumDriver appiumDriver) {
@@ -86,40 +93,47 @@ public class BaseTest implements IDriver {
         }
     }
 
-    protected void waitUntilPageLoad(){
+    protected void waitUntilPageLoad() {
         new WebDriverWait(getDriver(), waitTime).until(
             wd -> ((JavascriptExecutor) wd).executeScript(isPageReadyScript).equals(isPageReadyScriptResult)
         );
     }
 
     //Getters for pages
-    public LogInPage getLogInPage () {
-        if (logInPage == null)
-        return new LogInPage(appiumDriver);
-        else return logInPage;
+    public LogInPage getLogInPage() {
+        if (logInPage == null) {
+            return new LogInPage(appiumDriver);
+        } else {
+            return logInPage;
+        }
     }
 
-    public RegisterPage getRegisterPage () {
-        if (registerPage == null)
-        return new RegisterPage(appiumDriver);
-        else return registerPage;
+    public RegisterPage getRegisterPage() {
+        if (registerPage == null) {
+            return new RegisterPage(appiumDriver);
+        } else {
+            return registerPage;
+        }
     }
 
-    public BudgetActivityPage getBudgetActivityPage () {
-        if (budgetActivityPage == null)
-        return new BudgetActivityPage(appiumDriver);
-        else return budgetActivityPage;
+    public BudgetActivityPage getBudgetActivityPage() {
+        if (budgetActivityPage == null) {
+            return new BudgetActivityPage(appiumDriver);
+        } else {
+            return budgetActivityPage;
+        }
     }
 
-    public AppiumFluentWait getWebDriverWait () {
-        if (webDriverWait == null)
+    public AppiumFluentWait getWebDriverWait() {
+        if (webDriverWait == null) {
             return new AppiumFluentWait(appiumDriver);
-        else return webDriverWait;
+        } else {
+            return webDriverWait;
+        }
     }
 
     public void waitContentLoadById(String idSelector) {
         getWebDriverWait().until(
-            ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(idSelector)));}
+            ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(idSelector)));
     }
-
-
+}

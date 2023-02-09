@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class LogInPage extends BaseNativePage {
 
-    private String idAllLoginForm  = allElementsIdSelectorCommonPart + "login_form";
+    private String idAllLoginForm = allElementsIdSelectorCommonPart + "login_form";
     @FindBy(id = "platkovsky.alexey.epamtestapp:id/email_sign_in_button")
     private WebElement signInBtn;
 

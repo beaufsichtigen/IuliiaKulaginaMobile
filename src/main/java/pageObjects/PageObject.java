@@ -34,11 +34,12 @@ public class PageObject implements IPageObject {
     public WebElement getWelement(String weName) {
         // use reflection technique
         try {
-        Field field = somePageObject.getClass().getDeclaredField(weName);
-        field.setAccessible(true);
-        return (WebElement) field.get(somePageObject);
+            Field field = somePageObject.getClass().getDeclaredField(weName);
+            field.setAccessible(true);
+            return (WebElement) field.get(somePageObject);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             System.out.println("No such field");
             return null;
-    }}
+        }
+    }
 }
