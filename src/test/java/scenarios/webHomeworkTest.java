@@ -41,7 +41,7 @@ public class webHomeworkTest extends BaseTest {
                 break;
             case "IOS":
                 page.getSearchField().click();
-                page.getSearchField().sendKeys(searchText + Keys.ENTER);
+                page.getSearchField().sendKeys(searchText + Keys.ENTER); //tried + "\n" as well
                 break;
             default:
                 throw new Exception("Can't click Enter on " + platformName);
