@@ -2,8 +2,10 @@ package setup;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.AppiumFluentWait;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import pageObjects.NativePages.BudgetActivityPage;
@@ -114,4 +116,10 @@ public class BaseTest implements IDriver {
             return new AppiumFluentWait(appiumDriver);
         else return webDriverWait;
     }
-}
+
+    public void waitContentLoadById(String idSelector) {
+        getWebDriverWait().until(
+            ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(idSelector)));}
+    }
+
+

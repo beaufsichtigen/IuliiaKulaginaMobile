@@ -1,7 +1,5 @@
 package scenarios;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import setup.BaseTest;
@@ -15,8 +13,8 @@ public class nativeHomeworkTest extends BaseTest {
         getLogInPage().clickRegisterButton();
 
         //Wait when the page opens
-        getWebDriverWait().until(
-            ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(getRegisterPage().getIdAllRegisterForm())));
+        //waitUntilPageLoad();
+        waitContentLoadById(getRegisterPage().getIdAllRegisterForm());
 
         //get credentials from environment variables
         String email = System.getenv("email");
@@ -28,20 +26,18 @@ public class nativeHomeworkTest extends BaseTest {
 
         //click register
         getRegisterPage().getRegisterBtn().click();
-
-        getWebDriverWait().until(
-            ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(getLogInPage().getIdAllLoginForm())));
+        waitContentLoadById(getLogInPage().getIdAllLoginForm());
 
         //Try to sign
         getLogInPage().signIn(email, password);
 
         //Assert that there is text "BudgetActivity" and Add expense button
-        getWebDriverWait().until(
-            ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(getBudgetActivityPage().getIdAllBudgetActivity())));
+        waitContentLoadById(getBudgetActivityPage().getIdAllBudgetActivity());
 
         //Check that there are any element with "BudgetActivity" text
         SoftAssert soft = new SoftAssert();
         soft.assertNotNull(getBudgetActivityPage().getBudgetActivityText(), "Budget Activity message was not found");
+
         //Check that there are button Add Expense
         soft.assertEquals(getBudgetActivityPage().getAddExpenseBtn().getText(),"ADD EXPENSE", "Add expense button was not found");
 

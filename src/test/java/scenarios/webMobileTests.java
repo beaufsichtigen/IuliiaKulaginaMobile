@@ -6,9 +6,11 @@ import setup.BaseTest;
 
 public class webMobileTests extends BaseTest {
 
+    String ianaURL = "http://iana.org";
+
     @Test(groups = {"web"}, description = "Make sure that we've opened IANA homepage")
     public void simpleWebTest() {
-        getDriver().get("http://iana.org"); // open IANA homepage
+        getDriver().get(ianaURL); // open IANA homepage
 
         // Make sure that page has been loaded completely
         waitUntilPageLoad();

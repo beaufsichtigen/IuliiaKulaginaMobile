@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class GooglePage extends WebPageObject {
 
+    public static final String googleURL = "https://www.google.com";
+
     @FindBy(xpath = "//input")
     private WebElement searchField;
 
