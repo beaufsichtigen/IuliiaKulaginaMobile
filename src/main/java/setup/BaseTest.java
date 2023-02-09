@@ -111,7 +111,7 @@ public class BaseTest implements IDriver {
     }
 
     protected void waitUntilPageLoad() {
-        new WebDriverWait(getDriver(), 10).until(
+        new WebDriverWait(getDriver(), waitTime).until(
             wd -> ((JavascriptExecutor) wd).executeScript(isPageReadyScript).equals(isPageReadyScriptResult)
         );
     }
