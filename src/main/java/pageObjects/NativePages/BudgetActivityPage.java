@@ -7,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class BudgetActivityPage extends BaseNativePage {
 
-    private String idAllBudgetActivity = "platkovsky.alexey.epamtestapp:id/main_content";
-
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@label='Budget']")
     @FindBy(xpath = "//*[contains(@text,'BudgetActivity')]")
     private WebElement budgetActivity;

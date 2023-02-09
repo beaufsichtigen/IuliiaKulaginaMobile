@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 public class GooglePage extends WebPageObject {
 
+    public static final String googleURL = "https://www.google.com";
+
     public WebElement getSearchField() {
         return searchField;
     }
@@ -18,7 +20,6 @@ public class GooglePage extends WebPageObject {
     private List<WebElement> searchResults;
 
     //Change "Olvasson" to your scroll down button text if it differs
-
     public static final String scrollXpath = "//button//*[contains(text(),'Olvasson')]";
 
     //Change "eluta" to your accept cookie button text if it differs
@@ -40,20 +41,16 @@ public class GooglePage extends WebPageObject {
     }
 
     public boolean isResultsContainsText(String search) {
-        boolean resultCheck = false;
         for (WebElement result : searchResults) {
             String text = result.getText();
             if (text.contains(search)) {
-                resultCheck = true;
                 System.out.println(text);
-                break;
+                return true;
             }
-        }
-        return resultCheck;
+        } return false;
     }
 
     public WebElement getButtons() {
-
         return scrollButton;
     }
 

@@ -6,7 +6,6 @@
     <parameter name="platformName" value="Android"></parameter>
     <parameter name="appPackage" value="platkovsky.alexey.epamtestapp"></parameter>
     <parameter name="appActivity" value="activities.LoginActivity"></parameter>
-<!--    <parameter name="app" value="./src/main/resources/EPAMTestApp.apk"></parameter>-->
     <test name="Cloud Android Native tests">
         <groups>
             <run>

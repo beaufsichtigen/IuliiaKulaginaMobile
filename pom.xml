@@ -40,7 +40,6 @@
                         <suiteXmlFile>${suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-<!--                        <ts.appium>http://localhost:4723/wd/hub</ts.appium>-->
                         <ts.appium>https://EPM-TSTF:${env.TOKEN}@app.mobitru.com/wd/hub</ts.appium>
                     </systemPropertyVariables>
                 </configuration>

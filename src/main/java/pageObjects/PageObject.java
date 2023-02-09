@@ -27,10 +27,15 @@ public class PageObject implements IPageObject {
     }
 
     @Override
-    public WebElement getWelement(String weName) throws NoSuchFieldException, IllegalAccessException {
+    public WebElement getWelement(String weName) {
         // use reflection technique
-        Field field = somePageObject.getClass().getDeclaredField(weName);
-        field.setAccessible(true);
-        return (WebElement) field.get(somePageObject);
+        try {
+            Field field = somePageObject.getClass().getDeclaredField(weName);
+            field.setAccessible(true);
+            return (WebElement) field.get(somePageObject);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            System.out.println("No such field");
+            return null;
+        }
     }
 }

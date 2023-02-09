@@ -1,5 +1,7 @@
 package scenarios;
 
+import static pageObjects.WebPages.GooglePage.googleURL;
+
 import java.util.Locale;
 import org.openqa.selenium.Keys;
 import org.testng.Assert;
@@ -10,16 +12,16 @@ import setup.BaseTest;
 
 public class webHomeworkTest extends BaseTest {
 
+    String searchText = "EPAM";
+
     //test will be started with other "web" tests
     @Parameters({"platformName"})
     @Test(groups = {"web"}, description = "Check search results for the 'EPAM' word")
     public void WebTest(String platformName) throws Exception {
 
         //load google search page
-        getDriver().get("https://www.google.com");
+        getDriver().get(googleURL);
         waitUntilPageLoad();
-
-        String searchText = "EPAM";
 
         //create page object
         GooglePage page = new GooglePage(getDriver());
@@ -47,6 +49,6 @@ public class webHomeworkTest extends BaseTest {
 
         //Assert that result match request
         waitUntilPageLoad();
-        Assert.assertTrue(page.isResultsContainsText(searchText));
+        Assert.assertTrue(page.isResultsContainsText(searchText), "Messages in result don't match search request");
     }
 }

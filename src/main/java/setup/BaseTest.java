@@ -4,9 +4,14 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.AppiumFluentWait;
 import java.net.URLEncoder;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Optional;
+import org.testng.annotations.AfterClass;
 import pageObjects.NativePages.BudgetActivityPage;
 import pageObjects.NativePages.LogInPage;
 import pageObjects.NativePages.RegisterPage;
@@ -27,6 +32,10 @@ public class BaseTest implements IDriver {
 
     AppiumFluentWait webDriverWait;
     BudgetActivityPage budgetActivityPage;
+
+    static final int waitTime = 10;
+    static final String isPageReadyScript = "return document.readyState";
+    static final String isPageReadyScriptResult = "complete";
 
     @Override
     public AppiumDriver getDriver() {
@@ -55,7 +64,7 @@ public class BaseTest implements IDriver {
     }
 
     @AfterClass(alwaysRun = true) //changed for running two tests in one suite
-    public void tearDown() throws Exception {
+    public void tearDown() {
         System.out.println("After");
         appiumDriver.closeApp();
     }
@@ -94,7 +103,7 @@ public class BaseTest implements IDriver {
         }
 
         // Timeouts tuning
-        appiumDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        appiumDriver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
     }
 
     private void setPageObject(String appType, AppiumDriver appiumDriver) throws Exception {
@@ -103,7 +112,7 @@ public class BaseTest implements IDriver {
 
     protected void waitUntilPageLoad() {
         new WebDriverWait(getDriver(), 10).until(
-            wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete")
+            wd -> ((JavascriptExecutor) wd).executeScript(isPageReadyScript).equals(isPageReadyScriptResult)
         );
     }
 
@@ -149,5 +158,9 @@ public class BaseTest implements IDriver {
             waitUntilPageLoad();
             page.getAcceptButton().click();
         }
+    }
+
+    public void waitContentLoadByWebelement(WebElement element) {
+        getWebDriverWait().until(ExpectedConditions.visibilityOf(element));;
     }
 }

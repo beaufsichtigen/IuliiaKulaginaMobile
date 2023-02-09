@@ -7,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 
 public class LogInPage extends BaseNativePage {
 
-    private String idAllLoginForm = "platkovsky.alexey.epamtestapp:id/login_form";
-
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@label='Sign In']")
     @FindBy(id = "platkovsky.alexey.epamtestapp:id/email_sign_in_button")
     private WebElement signInBtn;
@@ -31,10 +29,6 @@ public class LogInPage extends BaseNativePage {
 
     public void clickRegisterButton() {
         registerBtn.click();
-    }
-
-    public String getIdAllLoginForm() {
-        return idAllLoginForm;
     }
 
     public void signIn(String emailOrUsername, String password) {
