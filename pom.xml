@@ -12,11 +12,8 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--        <testng>7.6.1</testng>-->
-        <!--        <assertj-core>3.23.1</assertj-core>-->
         <maven-compiler-plugin>3.8.1</maven-compiler-plugin>
         <maven-surefire-plugin>2.22.2</maven-surefire-plugin>
-        <!--        <aspectj.version>1.9.5</aspectj.version>-->
     </properties>
 
     <dependencies>
@@ -43,7 +40,7 @@
                         <suiteXmlFile>${suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <ts.appium>http://localhost:4723/wd/hub</ts.appium>
+                        <ts.appium>https://EPM-TSTF:${env.TOKEN}@app.mobitru.com/wd/hub</ts.appium>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
@@ -61,25 +58,43 @@
 
     <profiles>
         <profile>
-            <id>native</id>
+            <id>nativeAndroid</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.file>src/test/resources/nativeTNG.xml</suite.file>
+                <suite.file>src/test/resources/nativeAndroidTNG.xml</suite.file>
             </properties>
         </profile>
 
         <profile>
-            <id>web</id>
+            <id>nativeIOS</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>src/test/resources/nativeIOSTNG.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>webAndroid</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.file>./src/test/resources/webTNG.xml</suite.file>
+                <suite.file>./src/test/resources/webAndroidTNG.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>webIOS</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/webIOSTNG.xml</suite.file>
             </properties>
         </profile>
     </profiles>
-
-
 </project>

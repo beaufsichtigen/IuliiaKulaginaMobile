@@ -1,13 +1,14 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Web mobile testing Suite">
     <parameter name="appType" value="web"></parameter>
-    <parameter name="deviceName" value="emulator-5554"></parameter>
+    <parameter name="deviceName" value="GOOGLE PIXEL 4 XL"></parameter>
+    <parameter name="udid" value="07VACS00000G7Q"></parameter>
     <parameter name="platformName" value="Android"></parameter>
     <parameter name="browserName" value="Chrome"></parameter>
     <test name="Web tests">
         <groups>
             <run>
-                <include name="web"/>
+                <include name="Web"/>
             </run>
         </groups>
         <packages>
