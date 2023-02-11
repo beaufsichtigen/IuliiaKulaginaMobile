@@ -4,7 +4,10 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class WebPageObject {
-    public WebPageObject(AppiumDriver appiumDriver) {
-        PageFactory.initElements(appiumDriver, this);
+
+    AppiumDriver driver;
+    public WebPageObject(AppiumDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 }

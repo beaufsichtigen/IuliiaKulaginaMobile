@@ -20,7 +20,6 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
-import pageObjects.WebPages.GooglePage;
 
 public class BaseTest implements IDriver {
 
@@ -97,9 +96,7 @@ public class BaseTest implements IDriver {
         //        if(platformName.equals("iOS")) capabilities.setCapability("automationName","XCUITest");
 
         try {
-
-            String url = "https://" + System.getenv("USERNAMEMOBIT") + ":" + URLEncoder.encode(System.getenv("TOKEN"))
-                + "@app.mobitru.com/wd/hub";
+            String url = String.format("https://%s:%s@app.mobitru.com/wd/hub", System.getenv("USERNAMEMOBIT"), URLEncoder.encode(System.getenv("TOKEN")));
             System.out.println("url:" + url + capabilities);
             appiumDriver = new AppiumDriver(new URL(url), capabilities);
         } catch (MalformedURLException e) {
@@ -150,17 +147,6 @@ public class BaseTest implements IDriver {
             return new AppiumFluentWait(appiumDriver);
         } else {
             return webDriverWait;
-        }
-    }
-
-    public void acceptHungaryCookie(GooglePage page) {
-        waitUntilPageLoad();
-        if (page.getButtons().isDisplayed()) {
-            page.getButtons().click();
-            waitUntilPageLoad();
-            page.getButtons().click();
-            waitUntilPageLoad();
-            page.getAcceptButton().click();
         }
     }
 

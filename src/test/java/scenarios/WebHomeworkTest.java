@@ -30,22 +30,11 @@ public class WebHomeworkTest extends BaseTest {
 
         //Agree with cookies policy for Hungary.
         // If you have no this popup please commit.
-        acceptHungaryCookie(page);
+        waitUntilPageLoad();
+        page.acceptHungaryCookie(getWebDriverWait());
 
-        //Click enter
-        switch (platformName.toUpperCase(Locale.ROOT)) {
-            case "ANDROID":
-                //Fill search field
-                page.fillSearchField(searchText);
-                getDriver().getKeyboard().pressKey(Keys.ENTER); //don't work for the IOs
-                break;
-            case "IOS":
-                page.getSearchField().click();
-                page.getSearchField().sendKeys(searchText + Keys.ENTER); //tried + "\n" as well
-                break;
-            default:
-                throw new Exception("Can't click Enter on " + platformName);
-        }
+        //Fill search field and confirm
+        page.fillSearchFieldAndConfirm(searchText, platformName);
 
         //Assert that result match request
         waitUntilPageLoad();
