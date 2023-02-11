@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import pageObjects.WebPages.GooglePage;
 import setup.BaseTest;
 
-public class webHomeworkTest extends BaseTest {
+public class WebHomeworkTest extends BaseTest {
 
     String searchText = "EPAM";
 

@@ -7,7 +7,7 @@
     <test name="Cloud iOS Native tests">
         <groups>
             <run>
-                <include name="native"/>
+                <include name="Native"/>
             </run>
         </groups>
         <packages>

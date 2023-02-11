@@ -9,7 +9,7 @@ public class BudgetActivityPage extends BaseNativePage {
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@label='Budget']")
     @FindBy(xpath = "//*[contains(@text,'BudgetActivity')]")
-    private WebElement budgetActivity;
+    private WebElement budgetActivityLabel;
 
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@label='Add']")
     @FindBy(id = "platkovsky.alexey.epamtestapp:id/add_new_expense")
@@ -23,7 +23,7 @@ public class BudgetActivityPage extends BaseNativePage {
         return addExpenseBtn;
     }
 
-    public WebElement getBudgetActivity() {
-        return budgetActivity;
+    public WebElement getBudgetActivityLabel() {
+        return budgetActivityLabel;
     }
 }

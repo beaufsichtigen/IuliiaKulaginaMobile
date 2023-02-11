@@ -20,15 +20,11 @@ public class GooglePage extends WebPageObject {
     private List<WebElement> searchResults;
 
     //Change "Olvasson" to your scroll down button text if it differs
-    public static final String scrollXpath = "//button//*[contains(text(),'Olvasson')]";
-
-    //Change "eluta" to your accept cookie button text if it differs
-    public static final String acceptButtonXpath = "//button//*[contains(text(),'eluta')]";
-
-    @FindBy(xpath = scrollXpath)
+    @FindBy(xpath = "//button//*[contains(text(),'Olvasson')]")
     private WebElement scrollButton;
 
-    @FindBy(xpath = acceptButtonXpath)
+    //Change "eluta" to your accept cookie button text if it differs
+    @FindBy(xpath = "//button//*[contains(text(),'eluta')]")
     private WebElement acceptButton;
 
     public GooglePage(AppiumDriver driver) {

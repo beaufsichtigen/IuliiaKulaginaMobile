@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 import setup.BaseTest;
 
-public class webMobileTests extends BaseTest {
+public class WebMobileTests extends BaseTest {
 
     String ianaURL = "http://iana.org";
 

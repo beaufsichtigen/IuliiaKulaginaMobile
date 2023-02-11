@@ -9,7 +9,7 @@
     <test name="Cloud Android Native tests">
         <groups>
             <run>
-                <include name="native"/>
+                <include name="Native"/>
             </run>
         </groups>
         <packages>

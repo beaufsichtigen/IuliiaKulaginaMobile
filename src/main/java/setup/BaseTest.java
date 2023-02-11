@@ -57,10 +57,14 @@ public class BaseTest implements IDriver {
                       @Optional("") String app,
                       @Optional("") String appPackage,
                       @Optional("") String appActivity,
-                      @Optional("") String bundleId) throws Exception {
+                      @Optional("") String bundleId) {
         System.out.println("Before: app type - " + appType);
         setAppiumDriver(platformName, deviceName, udid, browserName, app, appPackage, appActivity, bundleId);
-        setPageObject(appType, appiumDriver);
+        try {
+            setPageObject(appType, appiumDriver);
+        } catch (Exception e) {
+            throw new RuntimeException("Can't set up " + e);
+        }
     }
 
     @AfterClass(alwaysRun = true) //changed for running two tests in one suite
